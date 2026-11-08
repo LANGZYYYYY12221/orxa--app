@@ -16,8 +16,7 @@ jobs:
 
       - name: Fix Gradle and Android Settings
         run: |
-          sed -i 's/gradle-8.7-bin.zip/gradle-8.14.0-bin.zip/g' android/gradle/wrapper/gradle-wrapper.properties
-          echo "android.newDsl=false" >> android/gradle.properties
+          sed -i 's|.*distributionUrl=.*|distributionUrl=https\\://services.gradle.org/distributions/gradle-8.14.1-bin.zip|' android/gradle/wrapper/gradle-wrapper.properties
 
       - name: Setup Java
         uses: actions/setup-java@v4
