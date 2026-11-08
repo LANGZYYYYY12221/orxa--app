@@ -14,15 +14,8 @@ jobs:
       - name: Extract Project
         run: unzip project.zip
 
-      - name: Fix Gradle Version
-        run: sed -i 's|.*distributionUrl=.*|distributionUrl=https\://services.gradle.org/distributions/gradle-8.14.1-bin.zip|' android/gradle/wrapper/gradle-wrapper.properties
-
-      - name: Force Disable New AGP DSL and Built-in Kotlin
-        run: |
-          sed -i '/android.newDsl/d' android/gradle.properties
-          sed -i '/android.builtInKotlin/d' android/gradle.properties
-          echo "android.newDsl=false" >> android/gradle.properties
-          echo "android.builtInKotlin=false" >> android/gradle.properties
+      - name: Fix Gradle Mirror
+        run: sed -i 's|.*distributionUrl=.*|distributionUrl=https\://services.gradle.org/distributions/gradle-8.7-bin.zip|' android/gradle/wrapper/gradle-wrapper.properties
 
       - name: Setup Java
         uses: actions/setup-java@v4
@@ -30,9 +23,10 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Setup Flutter
+      - name: Setup Flutter (Kunci ke versi lama)
         uses: subosito/flutter-action@v2
         with:
+          flutter-version: '3.41.9'
           channel: 'stable'
           cache: true
 
