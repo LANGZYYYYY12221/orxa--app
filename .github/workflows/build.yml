@@ -14,9 +14,10 @@ jobs:
       - name: Extract Project
         run: unzip project.zip
 
-      - name: Fix Gradle and Android Settings
-        run: |
-          sed -i 's|.*distributionUrl=.*|distributionUrl=https\\://services.gradle.org/distributions/gradle-8.14.1-bin.zip|' android/gradle/wrapper/gradle-wrapper.properties
+      - - name: Fix Gradle and Android Settings
+  run: |
+    sed -i 's|.*distributionUrl=.*|distributionUrl=https\\://services.gradle.org/distributions/gradle-8.14.1-bin.zip|' android/gradle/wrapper/gradle-wrapper.properties
+    echo -e "android.newDsl=false\nandroid.builtInKotlin=false" >> android/gradle.properties
 
       - name: Setup Java
         uses: actions/setup-java@v4
